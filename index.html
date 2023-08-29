@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- // Copyright © 2022 DocuSign, Inc.
+       // License: MIT Open Source https://opensource.org/licenses/MIT 
+  -->
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="DocuSign OAuth response page"
+    />
+    <title>JSFiddle OAuth response handler</title>
+  </head>
+  <body>
+    <h2>Please close this tab or window.</h2>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script>
+      const queryString = window.location.search;
+
+      // Create a URLSearchParams object from the query string
+      const urlParams = new URLSearchParams(queryString);
+      
+      const msg = {source: 'oauthResponse', code: urlParams.get('code') || ''}
+      if (window.opener) {
+        window.opener.postMessage(msg, '*');
+      } else {
+        window.parent.postMessage(msg, '*');
+      }
+    </script>
+  </body>
+</html>
